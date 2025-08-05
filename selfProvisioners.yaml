@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  creationTimestamp: "2025-06-15T12:53:21Z"
+  name: self-provisioners
+  resourceVersion: "5851"
+  uid: 9702f80f-91ca-4713-aa5a-5a7d2e62588b
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: self-provisioner
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:authenticated:oauth # this where you define the group
