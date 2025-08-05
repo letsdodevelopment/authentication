@@ -67,6 +67,9 @@ Now once the above section is modified, use `oc replace -f oauthcluster.yaml`
 
 ### Assign role to the user
 
+Below is the most important step, if you test the login using nimda,
+then if something happens, you are locked out.
+If means, you must reboot crc node i.e. `crc stop && crc start`
 `oc adm policy add-role-to-user cluster-admin nimda`
 
 But user is not visible in the identity or in the users lists
@@ -79,7 +82,7 @@ kubeadmin   a690ba2e-d1ed-4632-8278-e224c57159c7               myusers:kubeadmin
 nodiesop    9e01d4d2-8525-4b39-afa6-b595ef03503f               myusers:nodiesop
 #################################
 
-authentication git:(main) ✗ oc get identity
+oc get identity
 NAME                IDP NAME   IDP USER NAME   USER NAME   USER UID
 myusers:developer   myusers    developer       developer   291db44d-6895-46fb-92e8-b80d1912eb5f
 myusers:kubeadmin   myusers    kubeadmin       kubeadmin   a690ba2e-d1ed-4632-8278-e224c57159c7
@@ -132,6 +135,6 @@ oc set data secret/localusers --from-file samplefilepwdv1 -n openshift-config
 watch oc get pods -n openshift-authentication
 
 ### Confirm login works
-
+But be careful here as mentioned in the section ### Assign Role to the user
 oc login -u nodiesop -p secretPasswordYouEnteredEarlier
 
